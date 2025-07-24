@@ -61,8 +61,8 @@ function App() {
     let SUPABASE_URL_FINAL = supabaseUrlPlaceholder;
     let SUPABASE_ANON_KEY_FINAL = supabaseAnonKeyPlaceholder;
 
-    // These checks allow the Canvas environment to inject variables if available,
-    // otherwise they fall back to the placeholders (which you've now filled).
+    // Check if Canvas environment variables are available, otherwise use placeholders.
+    // Use typeof check to avoid 'no-undef' errors during Netlify build.
     if (typeof __supabase_url !== 'undefined' && __supabase_url !== null) {
       SUPABASE_URL_FINAL = __supabase_url;
     } else {
@@ -744,7 +744,7 @@ function ContactPage({ onBack }) {
             <li className="flex items-center justify-center md:justify-start text-lg">
               <Heart size={20} className="mr-2 text-pink-500" /> {/* Reused Heart */}
               <strong className="text-gray-800 mr-1">The Trevor Project (LGBTQ Youth):</strong>
-              <a href="tel:18664887386" className="text-indigo-600 hover:text-indigo-800 font-semibold transition-colors duration-200">1-866-488-7386</a> (Call) / Text START to <a href="sms:678678" className="text-indigo-600 hover:text-indigo-800 font-semibold transition-colors duration-200">678-678</a>
+              <a href="tel:18664887386" className="text-indigo-600 hover:text-indigo-800 font-semibold transition-colors duration-200">1-866-488-7386</a> (Call) / Text START to <a href="sms:678678" className="text-indigo-600 hover:text-indigo-800 font-semibold transition-colors duration-duration-200">678-678</a>
             </li>
              <li className="flex items-center justify-center md:justify-start text-lg">
               <Dribbble size={20} className="mr-2 text-orange-500" /> {/* Using Dribbble as a placeholder for NEDA */}
@@ -802,21 +802,6 @@ function AIChat({ supabase, userId, isAuthReady }) {
       return;
     }
 
-    // Correctly handle unsubscribe from onAuthStateChange
-    const { data: { subscription: authSubscription } = {} } = supabase.auth.onAuthStateChange((event, session) => {
-      // Re-fetch messages or update user ID if auth state changes
-      if (session) {
-        setUserId(session.user.id);
-      } else {
-        let anonSessionId = localStorage.getItem('anonSessionId');
-        if (!anonSessionId) {
-          anonSessionId = crypto.randomUUID();
-          localStorage.setItem('anonSessionId', anonSessionId);
-        }
-        setUserId(anonSessionId);
-      }
-    });
-
     // Use supabase.channel for real-time updates
     const channel = supabase
       .channel(`chat_messages_channel_${userId}`) // Unique channel name per user/session
@@ -857,9 +842,6 @@ function AIChat({ supabase, userId, isAuthReady }) {
       if (channel) {
         supabase.removeChannel(channel);
       }
-      if (authSubscription && typeof authSubscription.unsubscribe === 'function') {
-        authSubscription.unsubscribe();
-      }
     };
   }, [supabase, userId, isAuthReady]); // Add userId to dependencies to re-run fetch/channel if it changes
 
@@ -899,7 +881,7 @@ function AIChat({ supabase, userId, isAuthReady }) {
         // Prepare chat history for the backend, ensuring 'role' is correct
         const chatHistoryForBackend = messages.map(m => ({
           role: m.sender === 'user' ? 'user' : 'model', // Map 'ai' to 'model'
-          parts: [{ text: m.text }] // Assuming parts is an array with a text object
+          parts: [{ text: m.text }]
         }));
 
         // Add the current user message to history for the AI's context
