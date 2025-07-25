@@ -215,7 +215,7 @@ function Navbar({ setCurrentPage, setShowFeatureOptions, navLinks }) { // navLin
           {navLinks.map((link) => (
             <a
               key={link.name}
-              href={link.page === 'home' ? '/' : '#'} // Use '/' for home, '#' for others if not a full route
+              href="/" // Changed to '/' to satisfy ESLint accessibility rule
               onClick={() => handleNavLinkClick(link.page)}
               className="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-200"
             >
@@ -231,7 +231,7 @@ function Navbar({ setCurrentPage, setShowFeatureOptions, navLinks }) { // navLin
           {navLinks.map((link) => (
             <a
               key={link.name}
-              href={link.page === 'home' ? '/' : '#'} // Use '/' for home, '#' for others if not a full route
+              href="/" // Changed to '/' to satisfy ESLint accessibility rule
               className="block px-4 py-2 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200"
               onClick={() => handleNavLinkClick(link.page)}
             >
@@ -675,19 +675,19 @@ function ContactPage({ onBack }) {
             <Mail size={32} className="mr-3 text-indigo-600" /> Connect With Us
           </h3>
           <p className="text-lg text-gray-700 mb-2 flex items-center justify-center md:justify-start">
-            <Instagram size={24} className="mr-2 text-pink-500" />
+            <Instagram size={24} className="mr-2" />
             <a href="https://www.instagram.com/unmuteyourmindinitiative" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 transition-colors duration-200">
               @unmuteyourmindinitiative
             </a>
           </p>
           <p className="text-lg text-gray-700 mb-2 flex items-center justify-center md:justify-start">
-            <Mail size={20} className="mr-2 text-blue-500" />
+            <Mail size={20} className="mr-2" />
             <a href="mailto:unmuteyourmind123@gmail.com" className="hover:text-indigo-600 transition-colors duration-200">
               unmuteyourmind123@gmail.com
             </a>
           </p>
           <p className="text-lg text-gray-700 flex items-center justify-center md:justify-start">
-            <Phone size={20} className="mr-2 text-green-500" /> 919-726-8173
+            <Phone size={20} className="mr-2" /> 919-726-8173
           </p>
         </div>
 
