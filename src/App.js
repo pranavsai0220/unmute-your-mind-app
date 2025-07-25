@@ -13,10 +13,9 @@ const appNavLinks = [
   { name: 'Contact', page: 'contact' }, // Keep Contact in navLinks
 ];
 
-// Initialize Supabase Client placeholders
-// IMPORTANT: Replace these with your actual Supabase Project URL and Anon Key
-const supabaseUrlPlaceholder = "https://koewtjukwszehdeqmyjf.supabase.co"; // User provided URL
-const supabaseAnonKeyPlaceholder = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtvZXd0anVrd3N6ZWhkZXFteWpmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMzMDc4NzgsImV4cCI6MjA2ODg4Mzg3OH0.X-D5dC5tYrOwgSwV01tYYt8wUYD_nXpg2NETbXhxhZQ"; // User provided key
+// Initialize Supabase Client with your actual URL and Key
+const supabaseUrl = "https://koewtjukwszehdeqmyjf.supabase.co"; // Your actual Supabase Project URL
+const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtvZXd0anVrd3N6ZWhkZXFteWpmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMzMDc4NzgsImV4cCI6MjA2ODg4Mzg3OH0.X-D5dC5tYrOwgSwV01tYYt8wUYD_nXpg2NETbXhxhZQ"; // Your actual Supabase Anon Key
 
 // Main App Component
 function App() {
@@ -58,23 +57,6 @@ function App() {
 
   // Supabase Client Initialization and Auth State Listener
   useEffect(() => {
-    let SUPABASE_URL_FINAL = supabaseUrlPlaceholder;
-    let SUPABASE_ANON_KEY_FINAL = supabaseAnonKeyPlaceholder;
-
-    // Check if Canvas environment variables are available, otherwise use placeholders.
-    // Use typeof check to avoid 'no-undef' errors during Netlify build.
-    if (typeof __supabase_url !== 'undefined' && __supabase_url !== null) {
-      SUPABASE_URL_FINAL = __supabase_url;
-    } else {
-      console.warn("Supabase URL environment variable (__supabase_url) not found. Using provided placeholder.");
-    }
-
-    if (typeof __supabase_anon_key !== 'undefined' && __supabase_anon_key !== null) {
-      SUPABASE_ANON_KEY_FINAL = __supabase_anon_key;
-    } else {
-      console.warn("Supabase Anon Key environment variable (__supabase_anon_key) not found. Using provided placeholder.");
-    }
-
     // Dynamically load Supabase client library from CDN
     if (!window.supabase) {
       const script = document.createElement('script');
@@ -83,7 +65,8 @@ function App() {
       script.async = true;
       script.onload = () => {
         if (window.supabase && window.supabase.createClient) {
-          const client = window.supabase.createClient(SUPABASE_URL_FINAL, SUPABASE_ANON_KEY_FINAL);
+          // Use the directly defined supabaseUrl and supabaseAnonKey
+          const client = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
           setSupabaseClient(client);
           console.log("Supabase client loaded and initialized via CDN.");
         } else {
@@ -96,7 +79,8 @@ function App() {
       document.head.appendChild(script);
     } else {
       // If already loaded (e.g., from a previous render or external script)
-      const client = window.supabase.createClient(SUPABASE_URL_FINAL, SUPABASE_ANON_KEY_FINAL);
+      // Use the directly defined supabaseUrl and supabaseAnonKey
+      const client = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
       setSupabaseClient(client);
       console.log("Supabase client already present and initialized.");
     }
