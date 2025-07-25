@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+\import React, { useState, useEffect, useRef } from 'react';
 // Corrected import syntax for lucide-react, added Play for videos
 import { Menu, X, MessageSquare, Heart, BookOpen, TrendingUp, Instagram, Phone, Mail, Send, FileText, Wind, Smile, Music, Activity, Play, LifeBuoy, AlertCircle, Home, Brain, MessageSquareText, Shield, Dribbble } from 'lucide-react'; // Added more icons for crisis lines
 
@@ -190,6 +190,7 @@ function Navbar({ setCurrentPage, setShowFeatureOptions, navLinks }) { // navLin
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleNavLinkClick = (page) => {
+    console.log("Navigating to page:", page); // ADDED FOR DEBUGGING
     setCurrentPage(page); // This function updates the 'currentPage' state in App.js
     setShowFeatureOptions(false); // Hide feature options if navigating from navbar
     setIsMenuOpen(false); // Close menu on click
@@ -216,7 +217,10 @@ function Navbar({ setCurrentPage, setShowFeatureOptions, navLinks }) { // navLin
             <a
               key={link.name}
               href="/" // This is for ESLint/accessibility, onClick handles the actual page change
-              onClick={() => handleNavLinkClick(link.page)}
+              onClick={(e) => { // Added event parameter to prevent default behavior
+                e.preventDefault(); // Prevent default link behavior
+                handleNavLinkClick(link.page);
+              }}
               className="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-200"
             >
               {link.name}
@@ -233,7 +237,10 @@ function Navbar({ setCurrentPage, setShowFeatureOptions, navLinks }) { // navLin
               key={link.name}
               href="/" // This is for ESLint/accessibility, onClick handles the actual page change
               className="block px-4 py-2 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200"
-              onClick={() => handleNavLinkClick(link.page)}
+              onClick={(e) => { // Added event parameter to prevent default behavior
+                e.preventDefault(); // Prevent default link behavior
+                handleNavLinkClick(link.page);
+              }}
             >
               {link.name}
             </a>
@@ -564,6 +571,7 @@ function GentleMovementPlayer({ onBack }) {
   const [activeVideoIndex, setActiveVideoIndex] = useState(0);
   const [fade, setFade] = useState(false); // For fade transition
 
+  // Reset video index when category changes
   useEffect(() => {
     setActiveVideoIndex(0);
     setFade(true);
