@@ -19,7 +19,7 @@ const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 
 // Main App Component
 function App() {
-  const [currentPage, setCurrentPage] = useState('home');
+  const [currentPage, setCurrentPage] = useState('home'); // This state controls which page is shown
   const [showFeatureOptions, setShowFeatureOptions] = useState(false);
   const [userId, setUserId] = useState(null);
   const [isAuthReady, setIsAuthReady] = useState(false);
@@ -144,7 +144,7 @@ function App() {
           {showFeatureOptions ? (
             <FeatureSelection setCurrentPage={setCurrentPage} setShowFeatureOptions={setShowFeatureOptions} />
           ) : (
-            // Centralized rendering logic for main content
+            // This is the main routing logic that renders pages based on 'currentPage'
             (() => {
               switch (currentPage) {
                 case 'home':
@@ -190,7 +190,7 @@ function Navbar({ setCurrentPage, setShowFeatureOptions, navLinks }) { // navLin
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleNavLinkClick = (page) => {
-    setCurrentPage(page);
+    setCurrentPage(page); // This function updates the 'currentPage' state in App.js
     setShowFeatureOptions(false); // Hide feature options if navigating from navbar
     setIsMenuOpen(false); // Close menu on click
   };
@@ -215,7 +215,7 @@ function Navbar({ setCurrentPage, setShowFeatureOptions, navLinks }) { // navLin
           {navLinks.map((link) => (
             <a
               key={link.name}
-              href="/" // Changed to '/' to satisfy ESLint accessibility rule
+              href="/" // This is for ESLint/accessibility, onClick handles the actual page change
               onClick={() => handleNavLinkClick(link.page)}
               className="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-200"
             >
@@ -231,7 +231,7 @@ function Navbar({ setCurrentPage, setShowFeatureOptions, navLinks }) { // navLin
           {navLinks.map((link) => (
             <a
               key={link.name}
-              href="/" // Changed to '/' to satisfy ESLint accessibility rule
+              href="/" // This is for ESLint/accessibility, onClick handles the actual page change
               className="block px-4 py-2 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200"
               onClick={() => handleNavLinkClick(link.page)}
             >
@@ -564,7 +564,6 @@ function GentleMovementPlayer({ onBack }) {
   const [activeVideoIndex, setActiveVideoIndex] = useState(0);
   const [fade, setFade] = useState(false); // For fade transition
 
-  // Reset video index when category changes
   useEffect(() => {
     setActiveVideoIndex(0);
     setFade(true);
@@ -574,7 +573,6 @@ function GentleMovementPlayer({ onBack }) {
     return () => clearTimeout(timer);
   }, [activeCategory]);
 
-  // Trigger fade when video index changes
   useEffect(() => {
     setFade(true);
     const timer = setTimeout(() => {
@@ -675,19 +673,19 @@ function ContactPage({ onBack }) {
             <Mail size={32} className="mr-3 text-indigo-600" /> Connect With Us
           </h3>
           <p className="text-lg text-gray-700 mb-2 flex items-center justify-center md:justify-start">
-            <Instagram size={24} className="mr-2" />
+            <Instagram size={24} className="mr-2 text-pink-500" />
             <a href="https://www.instagram.com/unmuteyourmindinitiative" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 transition-colors duration-200">
               @unmuteyourmindinitiative
             </a>
           </p>
           <p className="text-lg text-gray-700 mb-2 flex items-center justify-center md:justify-start">
-            <Mail size={20} className="mr-2" />
+            <Mail size={20} className="mr-2 text-blue-500" />
             <a href="mailto:unmuteyourmind123@gmail.com" className="hover:text-indigo-600 transition-colors duration-200">
               unmuteyourmind123@gmail.com
             </a>
           </p>
           <p className="text-lg text-gray-700 flex items-center justify-center md:justify-start">
-            <Phone size={20} className="mr-2" /> 919-726-8173
+            <Phone size={20} className="mr-2 text-green-500" /> 919-726-8173
           </p>
         </div>
 
