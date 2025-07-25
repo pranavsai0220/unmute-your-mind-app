@@ -1,4 +1,4 @@
-\import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 // Corrected import syntax for lucide-react, added Play for videos
 import { Menu, X, MessageSquare, Heart, BookOpen, TrendingUp, Instagram, Phone, Mail, Send, FileText, Wind, Smile, Music, Activity, Play, LifeBuoy, AlertCircle, Home, Brain, MessageSquareText, Shield, Dribbble } from 'lucide-react'; // Added more icons for crisis lines
 
@@ -681,19 +681,19 @@ function ContactPage({ onBack }) {
             <Mail size={32} className="mr-3 text-indigo-600" /> Connect With Us
           </h3>
           <p className="text-lg text-gray-700 mb-2 flex items-center justify-center md:justify-start">
-            <Instagram size={24} className="mr-2 text-pink-500" />
+            <Instagram size={24} className="mr-2" />
             <a href="https://www.instagram.com/unmuteyourmindinitiative" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 transition-colors duration-200">
               @unmuteyourmindinitiative
             </a>
           </p>
           <p className="text-lg text-gray-700 mb-2 flex items-center justify-center md:justify-start">
-            <Mail size={20} className="mr-2 text-blue-500" />
+            <Mail size={20} className="mr-2" />
             <a href="mailto:unmuteyourmind123@gmail.com" className="hover:text-indigo-600 transition-colors duration-200">
               unmuteyourmind123@gmail.com
             </a>
           </p>
           <p className="text-lg text-gray-700 flex items-center justify-center md:justify-start">
-            <Phone size={20} className="mr-2 text-green-500" /> 919-726-8173
+            <Phone size={20} className="mr-2" /> 919-726-8173
           </p>
         </div>
 
