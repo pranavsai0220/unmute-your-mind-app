@@ -166,7 +166,7 @@ function App() {
                   return <GentleMovementPlayer />;
                 case 'contact': // Render the new ContactPage for the 'contact' route
                   return <ContactPage onBack={() => setCurrentPage('home')} />;
-                // All other pages will use the ComingSoonPage
+                // All other pages will be handled by ComingSoonPage
                 case 'journal':
                 case 'mood-tracker':
                 case 'summary':
@@ -199,7 +199,7 @@ function Navbar({ setCurrentPage, setShowFeatureOptions, navLinks }) { // navLin
     <nav className="bg-white shadow-sm py-4 px-6 md:px-12 sticky top-0 z-50 rounded-b-lg">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo/Text */}
-        <a href="#" onClick={() => handleNavLinkClick('home')} className="text-2xl font-bold text-indigo-600">
+        <a href="/" onClick={() => handleNavLinkClick('home')} className="text-2xl font-bold text-indigo-600">
           Unmute Your Mind
         </a>
 
@@ -215,7 +215,7 @@ function Navbar({ setCurrentPage, setShowFeatureOptions, navLinks }) { // navLin
           {navLinks.map((link) => (
             <a
               key={link.name}
-              href="#"
+              href={link.page === 'home' ? '/' : '#'} // Use '/' for home, '#' for others if not a full route
               onClick={() => handleNavLinkClick(link.page)}
               className="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-200"
             >
@@ -231,7 +231,7 @@ function Navbar({ setCurrentPage, setShowFeatureOptions, navLinks }) { // navLin
           {navLinks.map((link) => (
             <a
               key={link.name}
-              href="#"
+              href={link.page === 'home' ? '/' : '#'} // Use '/' for home, '#' for others if not a full route
               className="block px-4 py-2 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200"
               onClick={() => handleNavLinkClick(link.page)}
             >
