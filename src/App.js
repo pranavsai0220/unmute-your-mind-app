@@ -159,14 +159,14 @@ function App() {
                   // Pass supabaseClient to AIChat
                   return <AIChat supabase={supabaseClient} userId={userId} isAuthReady={isAuthReady} />;
                 case 'wellness-tools':
-                  return <WellnessToolsPage />; // Render the new WellnessToolsPage
+                  return <WellnessToolsPage />; // Render the WellnessToolsPage
                 case 'music-player':
-                  return <MusicPlayer />;
+                  return <MusicPlayer />; // Render the MusicPlayer
                 case 'gentle-movement-player':
-                  return <GentleMovementPlayer />;
+                  return <GentleMovementPlayer />; // Render the GentleMovementPlayer
                 case 'contact': // Render the new ContactPage for the 'contact' route
                   return <ContactPage onBack={() => setCurrentPage('home')} />;
-                // All other pages will be handled by ComingSoonPage
+                // All other pages will use the ComingSoonPage
                 case 'journal':
                 case 'mood-tracker':
                 case 'summary':
