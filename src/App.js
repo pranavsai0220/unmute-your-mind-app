@@ -16,7 +16,7 @@ const appNavLinks = [
 // Initialize Supabase Client placeholders
 // IMPORTANT: Replace these with your actual Supabase Project URL and Anon Key
 const supabaseUrlPlaceholder = "https://koewtjukwszehdeqmyjf.supabase.co"; // User provided URL
-const supabaseAnonKeyPlaceholder = "sb_publishable_QHDWkB3RmUsiubCWZ5VSZQ_GYQ_Z3WI"; // User provided key
+const supabaseAnonKeyPlaceholder = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtvZXd0anVrd3N6ZWhkZXFteWpmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMzMDc4NzgsImV4cCI6MjA2ODg4Mzg3OH0.X-D5dC5tYrOwgSwV01tYYt8wUYD_nXpg2NETbXhxhZQ"; // User provided key
 
 // Main App Component
 function App() {
