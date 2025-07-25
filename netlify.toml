@@ -1,0 +1,8 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+  functions = "netlify/functions" # This tells Netlify where your functions are
+
+[functions]
+  node_bundler = "esbuild" # Use esbuild for faster function builds (recommended)
+  node_version = "18"      # Explicitly set a modern Node.js version
